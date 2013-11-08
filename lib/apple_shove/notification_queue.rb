@@ -6,7 +6,7 @@ module AppleShove
     
     def initialize(key, redis = nil)
       if CONFIG[:redis_uri]
-        uri = CONFIG[:redis_uri]
+        uri = URI.parse(CONFIG[:redis_uri])
         redis ||= Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
       else
         redis ||= ::Redis.new

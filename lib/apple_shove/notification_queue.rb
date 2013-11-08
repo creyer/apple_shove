@@ -4,7 +4,13 @@ require 'redis'
 module AppleShove
   class NotificationQueue
     
-    def initialize(key, redis = Redis.new)
+    def initialize(key, redis = nil)
+      if CONFIG[:redis_uri]
+        uri = CONFIG[:redis_uri]
+        redis ||= Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+      else
+        redis ||= ::Redis.new
+      end
       @redis = redis
       @key = key
     end

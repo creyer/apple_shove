@@ -14,8 +14,11 @@ module AppleShove
     end
     
     def initialize(output_stream = STDOUT)
-      super(output_stream)
+      super(STDOUT)
+      self.level = Logger::DEBUG
       self.formatter = Formatter.new
+      $stdout.sync = true
+      self.warn("-----------------------START LOGGING THE APPLE PUSH LIBRARY------------")
       self
     end
         
@@ -52,8 +55,8 @@ module AppleShove
 
       output += "#{notification.device_token}\t" if notification
       output += msg
-      
       instance.send(severity, output)
+      #instance.flush
     end
   end
 end

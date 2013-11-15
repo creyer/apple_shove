@@ -19,7 +19,7 @@ options = {
 }
 
 options[:dir] = args[:pid_dir] if args[:pid_dir]
-
+options[:log_output]  = true
 if args[:log_dir]
   options[:log_output]  = true
   options[:log_dir]     = args[:log_dir]
